@@ -1,5 +1,5 @@
 site:
-  name: AI Research Notes
+  name: Xiaojing Yang · AI Research Notes
   site: 'https://techenglish.top'
   base: '/'
   trailingSlash: false
@@ -9,14 +9,14 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: AI Research Notes
-    template: '%s — AI Research Notes'
+    default: Xiaojing Yang · AI Research Notes
+    template: '%s — Xiaojing Yang'
   description: 'Bilingual foundations and research notes on mathematics, statistics, machine learning, NLP, LLMs, model evaluation, and applied AI systems.'
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AI Research Notes
+    site_name: Xiaojing Yang · AI Research Notes
     images:
       - url: '~/assets/images/default.png'
         width: 1200
