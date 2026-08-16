@@ -20,6 +20,10 @@ export interface Post {
   category?: Taxonomy;
   tags?: Taxonomy[];
   author?: string;
+  language?: 'en' | 'zh' | 'bilingual';
+  track?: 'Foundations' | 'Research & Applications';
+  summary_zh?: string;
+  summary_en?: string;
 
   metadata?: MetaData;
 

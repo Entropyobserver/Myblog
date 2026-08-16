@@ -1,0 +1,70 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+
+const metadata = {
+  title: 'Foundations',
+  description:
+    'Foundations track for AI Research Notes: mathematics, statistics, machine learning, NLP and LLMs, and research engineering.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Foundations"
+    actions={[
+      { variant: 'primary', text: 'All foundation posts', href: '/blog', icon: 'tabler:book-2' },
+      { text: 'Research track', href: '/research' },
+    ]}
+  >
+    <Fragment slot="title">Foundations I can reuse under pressure.</Fragment>
+    <Fragment slot="subtitle">
+      This part of the blog turns strong existing resources into my own working knowledge: concise explanations,
+      bilingual notes, practical examples, and links back to the sources that shaped the post.
+    </Fragment>
+  </Hero>
+
+  <Features
+    title="Foundation tracks"
+    subtitle="Each track is broad enough for interviews and deep enough to support research writing."
+    columns={3}
+    items={[
+      {
+        title: 'Mathematics',
+        description:
+          'Vectors, matrices, embeddings, dot products, optimization, gradients, PCA, and graph ideas used in ML/NLP.',
+        icon: 'tabler:math-symbols',
+        callToAction: { text: 'Read Mathematics', href: '/category/mathematics' },
+      },
+      {
+        title: 'Statistics',
+        description:
+          'Probability, distributions, confidence intervals, hypothesis tests, bootstrap resampling, and experimental uncertainty.',
+        icon: 'tabler:chart-dots',
+        callToAction: { text: 'Read Statistics', href: '/category/statistics' },
+      },
+      {
+        title: 'Machine Learning',
+        description:
+          'Train/validation/test splits, overfitting, cross-validation, regularization, model selection, losses, and tuning.',
+        icon: 'tabler:brain',
+        callToAction: { text: 'Read Machine Learning', href: '/category/machine-learning' },
+      },
+      {
+        title: 'NLP & LLMs',
+        description:
+          'Tokenization, embeddings, Transformers, fine-tuning, prompting, generation, and NLP evaluation basics.',
+        icon: 'tabler:message-language',
+        callToAction: { text: 'Read NLP & LLMs', href: '/category/nlp-and-llms' },
+      },
+      {
+        title: 'Research Engineering',
+        description:
+          'How experiments become reproducible: configs, logs, evaluation tables, data checks, demos, and documentation.',
+        icon: 'tabler:settings-code',
+        callToAction: { text: 'Read Research Engineering', href: '/category/research-engineering' },
+      },
+    ]}
+  />
+</Layout>

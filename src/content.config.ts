@@ -61,6 +61,10 @@ const postCollection = defineCollection({
     category: z.string().optional(),
     tags: z.array(z.string()).optional(),
     author: z.string().optional(),
+    language: z.enum(['en', 'zh', 'bilingual']).optional(),
+    track: z.enum(['Foundations', 'Research & Applications']).optional(),
+    summary_zh: z.string().optional(),
+    summary_en: z.string().optional(),
 
     metadata: metadataDefinition(),
   }),

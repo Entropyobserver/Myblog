@@ -1,5 +1,7 @@
 # build output
 dist/
+.local-node/
+astro-dev*.log
 .output/
 
 # dependencies

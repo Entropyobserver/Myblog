@@ -1,0 +1,70 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+
+const metadata = {
+  title: 'Research & Applications',
+  description:
+    'Research and applications track for AI Research Notes: multilingual AI, model evaluation, responsible AI, retrieval systems, and applied ML systems.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Research & Applications"
+    actions={[
+      { variant: 'primary', text: 'Read research posts', href: '/blog', icon: 'tabler:microscope' },
+      { text: 'Foundations track', href: '/foundations' },
+    ]}
+  >
+    <Fragment slot="title">Research topics, framed as transferable capabilities.</Fragment>
+    <Fragment slot="subtitle">
+      I do not want this blog to be boxed into one thesis topic. These categories keep the research side broad:
+      multilingual systems, evaluation, responsible AI, retrieval, and applied ML engineering.
+    </Fragment>
+  </Hero>
+
+  <Features
+    title="Research & application tracks"
+    subtitle="These labels are designed to cover current work and leave room for future AI/NLP directions."
+    columns={3}
+    items={[
+      {
+        title: 'Multilingual AI',
+        description:
+          'Machine translation, multilingual NLP, low-resource adaptation, domain terminology, language variation, and cross-lingual evaluation.',
+        icon: 'tabler:language',
+        callToAction: { text: 'Read Multilingual AI', href: '/category/multilingual-ai' },
+      },
+      {
+        title: 'Model Evaluation',
+        description:
+          'Metric design, benchmark construction, paired comparisons, statistical testing, ablations, error analysis, and human evaluation.',
+        icon: 'tabler:checklist',
+        callToAction: { text: 'Read Model Evaluation', href: '/category/model-evaluation' },
+      },
+      {
+        title: 'Explainability & Responsible AI',
+        description:
+          'Bias evaluation, interpretability, attribution, Shapley analysis, controlled prompts, model auditing, and responsible data practices.',
+        icon: 'tabler:shield-check',
+        callToAction: { text: 'Read Responsible AI', href: '/category/explainability-and-responsible-ai' },
+      },
+      {
+        title: 'Retrieval & Knowledge Systems',
+        description:
+          'RAG, search, sparse/dense/hybrid retrieval, graph retrieval, long documents, evidence grounding, and document QA.',
+        icon: 'tabler:database-search',
+        callToAction: { text: 'Read Retrieval', href: '/category/retrieval-and-knowledge-systems' },
+      },
+      {
+        title: 'Applied ML Systems',
+        description:
+          'Data analysis, classification, forecasting, information extraction, ML pipelines, deployment, demos, and practical AI products.',
+        icon: 'tabler:apps',
+        callToAction: { text: 'Read Applied ML', href: '/category/applied-ml-systems' },
+      },
+    ]}
+  />
+</Layout>
