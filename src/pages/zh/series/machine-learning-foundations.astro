@@ -1,0 +1,124 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: '机器学习基础',
+  description: '面向面试、应用研究和 NLP evaluation 的中英文机器学习基础系列。',
+};
+
+const sections = [
+  {
+    part: 'Part I',
+    title: '数据划分与泛化',
+    notes: [
+      ['训练集、验证集和测试集', '/zh/train-validation-test-splits'],
+      ['过拟合与正则化', '/zh/overfitting-and-regularization'],
+      ['用于模型评估的交叉验证', '/zh/cross-validation-for-model-evaluation'],
+      ['机器学习中的 Bias–Variance Trade-off', '/zh/bias-variance-tradeoff-in-machine-learning'],
+    ],
+  },
+  {
+    part: 'Part II',
+    title: '评估与选择',
+    notes: [
+      ['Accuracy 之外的评估指标', '/zh/metrics-beyond-accuracy'],
+      ['模型选择实用指南', '/zh/model-selection-practical-guide'],
+      ['Grid Search 和 Randomized Search', '/zh/grid-search-and-randomized-search'],
+      ['Pipelines 与 Data Leakage', '/zh/pipelines-and-data-leakage'],
+    ],
+  },
+  {
+    part: 'Part III',
+    title: '从传统 ML 到表示学习',
+    notes: [['Feature Engineering vs Representation Learning', '/zh/feature-engineering-vs-representation-learning']],
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="系列"
+    actions={[
+      {
+        variant: 'primary',
+        text: '从数据划分开始',
+        href: '/zh/train-validation-test-splits',
+        icon: 'tabler:route',
+      },
+      { text: 'EN', href: '/series/machine-learning-foundations' },
+      { text: 'ML 分类', href: '/category/machine-learning' },
+    ]}
+  >
+    <Fragment slot="title">机器学习基础</Fragment>
+    <Fragment slot="subtitle">
+      面向面试、应用 ML 和 AI/NLP 研究的实践型基础系列：数据划分、过拟合、交叉验证、指标、模型选择、调参、泄漏和表示学习。
+    </Fragment>
+  </Hero>
+
+  <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        sections.map((section) => (
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-emerald-600 dark:text-emerald-300">
+              {section.part}
+            </p>
+            <h2 class="mb-4 text-2xl font-bold">{section.title}</h2>
+            <ol class="space-y-3 text-muted dark:text-slate-300">
+              {section.notes.map(([title, href], index) => (
+                <li>
+                  <a class="hover:text-primary" href={href}>
+                    {index + 1}. {title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <Features
+    title="资料使用策略"
+    subtitle="这个系列使用经典、权威、角色清楚的材料，而不是随机拼凑博客。"
+    columns={3}
+    items={[
+      {
+        title: '学习主线',
+        description: 'Google ML Crash Course 和 ISLR/ISLP 负责直觉、结构和面试友好表达。',
+        icon: 'tabler:school',
+      },
+      {
+        title: '代码实践',
+        description: 'scikit-learn 负责 splits、cross-validation、metrics、pipelines 和 search 的实践标准。',
+        icon: 'tabler:code',
+      },
+      {
+        title: '研究深化',
+        description: 'CS229、Deep Learning Book 和论文把基础连接到可信的 AI/NLP evaluation。',
+        icon: 'tabler:microscope',
+      },
+    ]}
+  />
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: '阅读第一篇',
+        href: '/zh/train-validation-test-splits',
+        icon: 'tabler:arrow-right',
+      },
+      { text: 'English version', href: '/series/machine-learning-foundations' },
+    ]}
+  >
+    <Fragment slot="title">训练模型，但不要骗自己。</Fragment>
+    <Fragment slot="subtitle">
+      目标不是只记住 ML 术语，而是能做可靠的训练、评估和模型选择决策。
+    </Fragment>
+  </CallToAction>
+</Layout>

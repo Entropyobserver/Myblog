@@ -1,0 +1,126 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Machine Learning Foundations',
+  description:
+    'A bilingual practical series on ML fundamentals for interviews, applied research, and NLP evaluation.',
+};
+
+const sections = [
+  {
+    part: 'Part I',
+    title: 'Data Splits & Generalization',
+    notes: [
+      ['Train / Validation / Test Splits', '/train-validation-test-splits'],
+      ['Overfitting and Regularization', '/overfitting-and-regularization'],
+      ['Cross-Validation for Model Evaluation', '/cross-validation-for-model-evaluation'],
+      ['Bias–Variance Trade-off in Machine Learning', '/bias-variance-tradeoff-in-machine-learning'],
+    ],
+  },
+  {
+    part: 'Part II',
+    title: 'Evaluation & Selection',
+    notes: [
+      ['Metrics Beyond Accuracy', '/metrics-beyond-accuracy'],
+      ['Model Selection: A Practical Guide', '/model-selection-practical-guide'],
+      ['Grid Search and Randomized Search', '/grid-search-and-randomized-search'],
+      ['Pipelines and Data Leakage', '/pipelines-and-data-leakage'],
+    ],
+  },
+  {
+    part: 'Part III',
+    title: 'From Classical ML to Representation Learning',
+    notes: [['Feature Engineering vs Representation Learning', '/feature-engineering-vs-representation-learning']],
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Series"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Start with data splits',
+        href: '/train-validation-test-splits',
+        icon: 'tabler:route',
+      },
+      { text: '中文', href: '/zh/series/machine-learning-foundations' },
+      { text: 'ML posts', href: '/category/machine-learning' },
+    ]}
+  >
+    <Fragment slot="title">Machine Learning Foundations</Fragment>
+    <Fragment slot="subtitle">
+      A practical series for interviews, applied ML work, and AI/NLP research: data splitting, overfitting,
+      cross-validation, metrics, model selection, hyperparameter search, leakage, and representations.
+    </Fragment>
+  </Hero>
+
+  <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        sections.map((section) => (
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-emerald-600 dark:text-emerald-300">
+              {section.part}
+            </p>
+            <h2 class="mb-4 text-2xl font-bold">{section.title}</h2>
+            <ol class="space-y-3 text-muted dark:text-slate-300">
+              {section.notes.map(([title, href], index) => (
+                <li>
+                  <a class="hover:text-primary" href={href}>
+                    {index + 1}. {title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <Features
+    title="Source strategy"
+    subtitle="This series uses famous, reliable materials with clear roles instead of scattered blog posts."
+    columns={3}
+    items={[
+      {
+        title: 'Learn',
+        description: 'Google ML Crash Course and ISLR/ISLP provide intuition, structure, and interview-friendly language.',
+        icon: 'tabler:school',
+      },
+      {
+        title: 'Implement',
+        description: 'scikit-learn gives practical APIs for splits, cross-validation, metrics, pipelines, and search.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Research',
+        description: 'CS229, Deep Learning Book, and papers connect the basics to credible AI/NLP evaluation.',
+        icon: 'tabler:microscope',
+      },
+    ]}
+  />
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Read the first note',
+        href: '/train-validation-test-splits',
+        icon: 'tabler:arrow-right',
+      },
+      { text: '中文版本', href: '/zh/series/machine-learning-foundations' },
+    ]}
+  >
+    <Fragment slot="title">Build models without fooling yourself.</Fragment>
+    <Fragment slot="subtitle">
+      The goal is not just to know ML terms, but to make reliable training, evaluation, and selection decisions.
+    </Fragment>
+  </CallToAction>
+</Layout>
