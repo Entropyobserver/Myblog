@@ -1,0 +1,133 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'NLP 与 LLM 基础',
+  description: '关于 tokenization、embeddings、seq2seq、attention、Transformers、fine-tuning、PEFT、prompting 和 evaluation 的中英文系列。',
+};
+
+const sections = [
+  {
+    part: 'Part I',
+    title: '语言如何成为模型输入',
+    notes: [
+      ['Tokenization and Subwords：为什么切词会影响模型', '/zh/tokenization-and-subwords'],
+      ['词向量与句向量', '/zh/word-and-sentence-embeddings'],
+    ],
+  },
+  {
+    part: 'Part II',
+    title: '模型架构',
+    notes: [
+      ['Sequence-to-Sequence Models', '/zh/sequence-to-sequence-models'],
+      ['Attention Mechanism：注意力机制', '/zh/attention-mechanism'],
+      ['NLP 中的 Transformers', '/zh/transformers-for-nlp'],
+    ],
+  },
+  {
+    part: 'Part III',
+    title: '适配与交互',
+    notes: [
+      ['Fine-Tuning Transformers', '/zh/fine-tuning-transformers'],
+      ['Parameter-Efficient Fine-Tuning', '/zh/parameter-efficient-fine-tuning'],
+      ['Prompting and Instruction Following', '/zh/prompting-and-instruction-following'],
+    ],
+  },
+  {
+    part: 'Part IV',
+    title: '评估',
+    notes: [
+      ['NLP Evaluation：自然语言处理评估', '/zh/nlp-evaluation'],
+      ['LLM Evaluation and Failure Modes', '/zh/llm-evaluation-and-failure-modes'],
+    ],
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="系列"
+    actions={[
+      {
+        variant: 'primary',
+        text: '从 Tokenization 开始',
+        href: '/zh/tokenization-and-subwords',
+        icon: 'tabler:message-language',
+      },
+      { text: 'EN', href: '/series/nlp-and-llms' },
+      { text: 'NLP 分类', href: '/category/nlp-and-llms' },
+    ]}
+  >
+    <Fragment slot="title">NLP 与 LLM 基础</Fragment>
+    <Fragment slot="subtitle">
+      一条面向研究和实践的路线：tokenization、embeddings、seq2seq、attention、Transformers、fine-tuning、PEFT、prompting 和 NLP/LLM evaluation。
+    </Fragment>
+  </Hero>
+
+  <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="grid gap-6 md:grid-cols-2">
+      {
+        sections.map((section) => (
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-violet-600 dark:text-violet-300">
+              {section.part}
+            </p>
+            <h2 class="mb-4 text-2xl font-bold">{section.title}</h2>
+            <ol class="space-y-3 text-muted dark:text-slate-300">
+              {section.notes.map(([title, href], index) => (
+                <li>
+                  <a class="hover:text-primary" href={href}>
+                    {index + 1}. {title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <Features
+    title="这个系列为什么更像你"
+    subtitle="它不是普通 NLP 教程，而是把每个基础概念都连接到 multilingual AI、domain MT、LoRA/PEFT、RAG 和 evaluation。"
+    columns={3}
+    items={[
+      {
+        title: '概念主线',
+        description: 'Jurafsky & Martin、CS224N 和 Illustrated Transformer 提供概念骨架。',
+        icon: 'tabler:book',
+      },
+      {
+        title: '实践主线',
+        description: 'Hugging Face Course、Transformers、Tokenizers、Evaluate 和 PEFT 提供实现方式。',
+        icon: 'tabler:code',
+      },
+      {
+        title: '研究连接',
+        description: 'MT、多语、LoRA、COMET 和 LLM failure modes 连接到你的研究身份。',
+        icon: 'tabler:microscope',
+      },
+    ]}
+  />
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: '阅读第一篇',
+        href: '/zh/tokenization-and-subwords',
+        icon: 'tabler:arrow-right',
+      },
+      { text: 'English version', href: '/series/nlp-and-llms' },
+    ]}
+  >
+    <Fragment slot="title">从语言变成模型输入的地方开始。</Fragment>
+    <Fragment slot="subtitle">
+      Tokenization 是一个安静但关键的第一决定，它塑造了多语模型能学到什么。
+    </Fragment>
+  </CallToAction>
+</Layout>

@@ -38,6 +38,10 @@ export const headerData = {
           href: getPermalink('nlp-and-llms', 'category'),
         },
         {
+          text: 'NLP & LLM Foundations',
+          href: getPermalink('/series/nlp-and-llms'),
+        },
+        {
           text: 'Research Engineering',
           href: getPermalink('research-engineering', 'category'),
         },
@@ -91,6 +95,7 @@ export const footerData = {
         { text: 'Machine Learning', href: getPermalink('machine-learning', 'category') },
         { text: 'Machine Learning Foundations', href: getPermalink('/series/machine-learning-foundations') },
         { text: 'NLP & LLMs', href: getPermalink('nlp-and-llms', 'category') },
+        { text: 'NLP & LLM Foundations', href: getPermalink('/series/nlp-and-llms') },
         { text: 'Research Engineering', href: getPermalink('research-engineering', 'category') },
       ],
     },
