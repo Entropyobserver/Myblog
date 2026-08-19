@@ -22,6 +22,10 @@ export const headerData = {
           href: getPermalink('statistics', 'category'),
         },
         {
+          text: 'Statistics for AI Research',
+          href: getPermalink('/series/statistics-for-ai-research'),
+        },
+        {
           text: 'Machine Learning',
           href: getPermalink('machine-learning', 'category'),
         },
