@@ -57,6 +57,16 @@ const { post, url } = Astro.props;
             )
           }
         </p>
+        {
+          post.translationHref && (
+            <a
+              class="mt-3 inline-flex w-fit items-center rounded-full border border-slate-200 px-3 py-1 text-sm font-semibold text-primary hover:bg-blue-50 dark:border-slate-700 dark:hover:bg-slate-800 sm:mt-0"
+              href={post.translationHref}
+            >
+              {post.translationLabel || 'Read translation'}
+            </a>
+          )
+        }
       </div>
 
       <h1

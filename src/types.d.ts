@@ -24,6 +24,9 @@ export interface Post {
   track?: 'Foundations' | 'Research & Applications';
   summary_zh?: string;
   summary_en?: string;
+  translationKey?: string;
+  translationHref?: string;
+  translationLabel?: string;
 
   metadata?: MetaData;
 

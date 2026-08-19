@@ -57,6 +57,9 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     track,
     summary_zh,
     summary_en,
+    translationKey,
+    translationHref,
+    translationLabel,
     draft = false,
     metadata = {},
   } = data;
@@ -96,6 +99,9 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     track,
     summary_zh,
     summary_en,
+    translationKey,
+    translationHref,
+    translationLabel,
 
     draft: draft,
 
