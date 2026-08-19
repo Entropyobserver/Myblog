@@ -8,6 +8,51 @@ const metadata = {
   title: 'AI 研究中的统计直觉',
   description: '一个关于统计基础、不确定性、模型评估，以及从统计到机器学习的中文系列。',
 };
+
+const sections = [
+  {
+    part: 'Part I',
+    title: '统计基础',
+    notes: [
+      ['为什么统计对 AI 研究很重要', '/zh/why-statistics-matters-for-ai-research'],
+      ['随机变量、期望和方差', '/zh/random-variables-expectation-and-variance'],
+      ['机器学习中的概率分布', '/zh/probability-distributions-for-machine-learning'],
+    ],
+  },
+  {
+    part: 'Part II',
+    title: '不确定性与模型评估',
+    notes: [
+      ['置信区间：为什么一个分数不够', '/zh/confidence-intervals-one-score-is-not-enough'],
+      ['模型评估中的 Bootstrap Resampling', '/zh/bootstrap-resampling-for-model-evaluation'],
+      ['不要仪式化地使用假设检验', '/zh/hypothesis-testing-without-rituals'],
+      ['效应量：显著不等于重要', '/zh/effect-size-statistical-significance-is-not-enough'],
+    ],
+  },
+  {
+    part: 'Part III',
+    title: '从统计到机器学习',
+    notes: [
+      ['作为统计模型的线性回归', '/zh/linear-regression-as-a-statistical-model'],
+      ['正则化：L1 和 L2 背后的统计思想', '/zh/regularization-statistics-behind-l1-and-l2'],
+      ['Bias–Variance Trade-off', '/zh/bias-variance-tradeoff'],
+      ['PCA：从方差到表示空间', '/zh/pca-from-variance-to-representation'],
+      ['最大似然估计：模型为什么能学习参数', '/zh/maximum-likelihood-estimation-why-models-learn-parameters'],
+      ['MAP 估计与贝叶斯思维', '/zh/map-estimation-and-bayesian-thinking'],
+    ],
+  },
+  {
+    part: 'Part IV',
+    title: 'AI/NLP 研究中的统计思维',
+    notes: [
+      ['多重比较：AI 实验中的隐藏问题', '/zh/multiple-comparisons-in-ai-experiments'],
+      ['Power Analysis：到底需要多少实验', '/zh/power-analysis-how-many-experiments'],
+      ['用于多模型比较的 ANOVA', '/zh/anova-for-comparing-multiple-models'],
+      ['NLP 和 LLM 评估中的统计检验', '/zh/statistical-testing-for-nlp-and-llm-evaluation'],
+      ['AI 研究中的相关性与因果性', '/zh/correlation-vs-causation-in-ai-research'],
+    ],
+  },
+];
 ---
 
 <Layout metadata={metadata}>
@@ -26,83 +71,56 @@ const metadata = {
   >
     <Fragment slot="title">AI 研究中的统计直觉</Fragment>
     <Fragment slot="subtitle">
-      这个系列把概率、统计和模型评估整理成 AI 实验中的判断工具：如何理解分数、判断不确定性、比较模型，以及避免过度声称。
+      从概率、统计推断到 ML/NLP evaluation 的实践型学习路线。每篇都有独立英文版，并且可以在文章顶部切换语言。
     </Fragment>
   </Hero>
 
   <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-    <div class="grid gap-6 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-300">Part I</p>
-        <h2 class="mb-4 text-2xl font-bold">统计基础</h2>
-        <ol class="space-y-3 text-muted dark:text-slate-300">
-          <li>1. 为什么统计对 AI 研究很重要</li>
-          <li>2. 随机变量、期望和方差</li>
-          <li>3. 机器学习中的概率分布</li>
-        </ol>
-      </div>
-
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-300">Part II</p>
-        <h2 class="mb-4 text-2xl font-bold">不确定性与模型评估</h2>
-        <ol class="space-y-3 text-muted dark:text-slate-300">
-          <li>4. 置信区间：为什么一个分数不够</li>
-          <li>5. 模型评估中的 Bootstrap Resampling</li>
-          <li>6. 不要仪式化地使用假设检验</li>
-        </ol>
-      </div>
-
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-300">Part III</p>
-        <h2 class="mb-4 text-2xl font-bold">从统计到机器学习</h2>
-        <ol class="space-y-3 text-muted dark:text-slate-300">
-          <li>7. 作为统计模型的线性回归</li>
-          <li>8. PCA：从方差到表示空间</li>
-        </ol>
-      </div>
+    <div class="grid gap-6 md:grid-cols-2">
+      {
+        sections.map((section) => (
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-300">
+              {section.part}
+            </p>
+            <h2 class="mb-4 text-2xl font-bold">{section.title}</h2>
+            <ol class="space-y-3 text-muted dark:text-slate-300">
+              {section.notes.map(([title, href], index) => (
+                <li>
+                  <a class="hover:text-primary" href={href}>
+                    {index + 1}. {title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))
+      }
     </div>
   </section>
 
   <Features
-    title="为什么这个系列适合放在博客里"
-    subtitle="Seeing Theory、看见统计和 StatQuest 很适合建立直觉；这个系列要做的是把这些直觉连接到我自己的 AI/NLP 研究问题。"
+    title="这个系列怎么设计"
+    subtitle="它会吸收 Seeing Theory、看见统计、StatQuest、Think Stats、ISLR/ISLP 和统计推断教材的优点，然后转化成 AI/NLP 研究习惯。"
     columns={3}
     items={[
       {
-        title: '从直觉到实验',
-        description: '方差、抽样、置信区间这些概念会变成判断 AI 结果是否稳定的工具。',
+        title: '先建立概念图',
+        description: '每篇都先给直觉模型，再进入公式、实验和研究表达。',
         icon: 'tabler:bulb',
       },
       {
-        title: '从公式到判断',
-        description: '统计帮助我们判断模型差异是否可信、指标是否足够、数据是否代表真实任务。',
-        icon: 'tabler:scale',
+        title: '连接 AI/NLP 场景',
+        description: '例子会连接 MT、RAG、LLM evaluation、bias analysis 和 applied ML systems。',
+        icon: 'tabler:microscope',
       },
       {
-        title: '从基础到研究',
-        description: '这个系列会连接 MT 评估、RAG 评估、bias analysis、人工标注和 applied ML systems。',
-        icon: 'tabler:microscope',
+        title: '服务研究写作',
+        description: '重点不是只会算一个数，而是知道如何谨慎地提出研究结论。',
+        icon: 'tabler:writing',
       },
     ]}
   />
-
-  <section class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
-    <div class="rounded-3xl bg-blue-50 p-6 dark:bg-slate-900">
-      <h2 class="mb-4 text-2xl font-bold">下一阶段主题</h2>
-      <div class="grid gap-3 text-sm text-muted dark:text-slate-300 sm:grid-cols-2">
-        <span>AI 研究中的相关性与因果性</span>
-        <span>最大似然估计：模型为什么能学习参数</span>
-        <span>MAP 估计与贝叶斯思维</span>
-        <span>L1/L2 正则化背后的统计思想</span>
-        <span>Bias-Variance Trade-off</span>
-        <span>用于多模型比较的 ANOVA</span>
-        <span>效应量：显著不等于重要</span>
-        <span>多重比较：AI 实验中的隐藏问题</span>
-        <span>Power Analysis：到底需要多少实验</span>
-        <span>NLP 和 LLM 评估中的统计检验</span>
-      </div>
-    </div>
-  </section>
 
   <CallToAction
     actions={[
@@ -112,6 +130,7 @@ const metadata = {
         href: '/zh/why-statistics-matters-for-ai-research',
         icon: 'tabler:arrow-right',
       },
+      { text: 'English version', href: '/series/statistics-for-ai-research' },
     ]}
   >
     <Fragment slot="title">先从不确定性开始。</Fragment>

@@ -9,6 +9,51 @@ const metadata = {
   description:
     'A bilingual series on statistical foundations, uncertainty, model evaluation, and the path from statistics to machine learning.',
 };
+
+const sections = [
+  {
+    part: 'Part I',
+    title: 'Statistical Foundations',
+    notes: [
+      ['Why Statistics Matters for AI Research', '/why-statistics-matters-for-ai-research'],
+      ['Random Variables, Expectation, and Variance', '/random-variables-expectation-and-variance'],
+      ['Probability Distributions for Machine Learning', '/probability-distributions-for-machine-learning'],
+    ],
+  },
+  {
+    part: 'Part II',
+    title: 'Uncertainty & Model Evaluation',
+    notes: [
+      ['Confidence Intervals: Why One Score Is Not Enough', '/confidence-intervals-one-score-is-not-enough'],
+      ['Bootstrap Resampling for Model Evaluation', '/bootstrap-resampling-for-model-evaluation'],
+      ['Hypothesis Testing Without Rituals', '/hypothesis-testing-without-rituals'],
+      ['Effect Size: Statistical Significance Is Not Enough', '/effect-size-statistical-significance-is-not-enough'],
+    ],
+  },
+  {
+    part: 'Part III',
+    title: 'Statistics → Machine Learning',
+    notes: [
+      ['Linear Regression as a Statistical Model', '/linear-regression-as-a-statistical-model'],
+      ['Regularization: Statistics Behind L1 and L2', '/regularization-statistics-behind-l1-and-l2'],
+      ['Bias–Variance Trade-off', '/bias-variance-tradeoff'],
+      ['PCA: From Variance to Representation', '/pca-from-variance-to-representation'],
+      ['Maximum Likelihood Estimation: Why Models Learn Parameters', '/maximum-likelihood-estimation-why-models-learn-parameters'],
+      ['MAP Estimation and Bayesian Thinking', '/map-estimation-and-bayesian-thinking'],
+    ],
+  },
+  {
+    part: 'Part IV',
+    title: 'Statistical Thinking for AI/NLP',
+    notes: [
+      ['Multiple Comparisons in AI Experiments', '/multiple-comparisons-in-ai-experiments'],
+      ['Power Analysis: How Many Experiments Do You Need?', '/power-analysis-how-many-experiments'],
+      ['ANOVA for Comparing Multiple Models', '/anova-for-comparing-multiple-models'],
+      ['Statistical Testing for NLP and LLM Evaluation', '/statistical-testing-for-nlp-and-llm-evaluation'],
+      ['Correlation vs. Causation in AI Research', '/correlation-vs-causation-in-ai-research'],
+    ],
+  },
+];
 ---
 
 <Layout metadata={metadata}>
@@ -27,87 +72,57 @@ const metadata = {
   >
     <Fragment slot="title">Statistics for AI Research</Fragment>
     <Fragment slot="subtitle">
-      A series that turns probability, statistics, and model evaluation into practical tools for reasoning about AI
-      experiments.
+      A practical learning path from probability and statistical inference to ML/NLP evaluation. Each note has a
+      separate Chinese version and a language switch.
     </Fragment>
   </Hero>
 
   <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-    <div class="grid gap-6 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-300">Part I</p>
-        <h2 class="mb-4 text-2xl font-bold">Statistical Foundations</h2>
-        <ol class="space-y-3 text-muted dark:text-slate-300">
-          <li>1. Why Statistics Matters for AI Research</li>
-          <li>2. Random Variables, Expectation, and Variance</li>
-          <li>3. Probability Distributions for Machine Learning</li>
-        </ol>
-      </div>
-
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-300">Part II</p>
-        <h2 class="mb-4 text-2xl font-bold">Uncertainty & Evaluation</h2>
-        <ol class="space-y-3 text-muted dark:text-slate-300">
-          <li>4. Confidence Intervals: Why One Score Is Not Enough</li>
-          <li>5. Bootstrap Resampling for Model Evaluation</li>
-          <li>6. Hypothesis Testing Without Rituals</li>
-        </ol>
-      </div>
-
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-300">Part III</p>
-      <h2 class="mb-4 text-2xl font-bold">Statistics to ML</h2>
-        <ol class="space-y-3 text-muted dark:text-slate-300">
-          <li>7. Linear Regression as a Statistical Model</li>
-          <li>8. PCA: From Variance to Representation</li>
-        </ol>
-      </div>
+    <div class="grid gap-6 md:grid-cols-2">
+      {
+        sections.map((section) => (
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-300">
+              {section.part}
+            </p>
+            <h2 class="mb-4 text-2xl font-bold">{section.title}</h2>
+            <ol class="space-y-3 text-muted dark:text-slate-300">
+              {section.notes.map(([title, href], index) => (
+                <li>
+                  <a class="hover:text-primary" href={href}>
+                    {index + 1}. {title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))
+      }
     </div>
   </section>
 
   <Features
-    title="Why this series belongs on the blog"
-    subtitle="The goal is not to rewrite existing materials. Seeing Theory, 看见统计, and StatQuest are excellent sources for intuition; this series adds my AI/NLP research context."
+    title="How this series is designed"
+    subtitle="The series borrows the learning strengths of Seeing Theory, StatQuest, Think Stats, ISLR/ISLP, and statistical inference texts, then translates them into AI/NLP research habits."
     columns={3}
     items={[
       {
-        title: 'From intuition to experiment',
-        description:
-          'Concepts like variance, sampling, and confidence intervals become tools for judging whether an AI result is stable.',
+        title: 'Concept first',
+        description: 'Each note starts with a visual mental model before formulas or experimental details.',
         icon: 'tabler:bulb',
       },
       {
-        title: 'From formulas to decisions',
-        description:
-          'Statistics helps decide whether a model comparison is meaningful, whether a metric is enough, and whether data is representative.',
-        icon: 'tabler:scale',
+        title: 'AI/NLP examples',
+        description: 'Examples connect the concept to MT, RAG, LLM evaluation, bias analysis, and applied ML systems.',
+        icon: 'tabler:microscope',
       },
       {
-        title: 'From foundations to research',
-        description:
-          'The series connects basic statistics to MT evaluation, RAG evaluation, bias analysis, human annotation, and applied ML systems.',
-        icon: 'tabler:microscope',
+        title: 'Research writing',
+        description: 'The notes emphasize how to make careful claims, not just how to compute a number.',
+        icon: 'tabler:writing',
       },
     ]}
   />
-
-  <section class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
-    <div class="rounded-3xl bg-blue-50 p-6 dark:bg-slate-900">
-      <h2 class="mb-4 text-2xl font-bold">Next-stage topics</h2>
-      <div class="grid gap-3 text-sm text-muted dark:text-slate-300 sm:grid-cols-2">
-        <span>Correlation vs. Causation in AI Research</span>
-        <span>Maximum Likelihood Estimation</span>
-        <span>MAP Estimation and Bayesian Thinking</span>
-        <span>Regularization: Statistics Behind L1 and L2</span>
-        <span>Bias-Variance Trade-off</span>
-        <span>ANOVA for Comparing Multiple Models</span>
-        <span>Effect Size: Statistical Significance Is Not Enough</span>
-        <span>Multiple Comparisons in AI Experiments</span>
-        <span>Power Analysis: How Many Experiments Do You Need?</span>
-        <span>Statistical Testing for NLP and LLM Evaluation</span>
-      </div>
-    </div>
-  </section>
 
   <CallToAction
     actions={[
@@ -117,6 +132,7 @@ const metadata = {
         href: '/why-statistics-matters-for-ai-research',
         icon: 'tabler:arrow-right',
       },
+      { text: '中文版本', href: '/zh/series/statistics-for-ai-research' },
     ]}
   >
     <Fragment slot="title">Start with uncertainty.</Fragment>
