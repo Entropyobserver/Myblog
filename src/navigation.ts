@@ -67,6 +67,10 @@ export const headerData = {
           href: getPermalink('explainability-and-responsible-ai', 'category'),
         },
         {
+          text: 'Training Data Attribution',
+          href: getPermalink('/series/training-data-attribution'),
+        },
+        {
           text: 'Retrieval & Knowledge Systems',
           href: getPermalink('retrieval-and-knowledge-systems', 'category'),
         },
@@ -105,6 +109,7 @@ export const footerData = {
         { text: 'Multilingual AI', href: getPermalink('multilingual-ai', 'category') },
         { text: 'Model Evaluation', href: getPermalink('model-evaluation', 'category') },
         { text: 'Responsible AI', href: getPermalink('explainability-and-responsible-ai', 'category') },
+        { text: 'Training Data Attribution', href: getPermalink('/series/training-data-attribution') },
         { text: 'Retrieval Systems', href: getPermalink('retrieval-and-knowledge-systems', 'category') },
         { text: 'Applied ML Systems', href: getPermalink('applied-ml-systems', 'category') },
       ],

@@ -1,0 +1,144 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Training Data Attribution for NLP and LLM Research',
+  description:
+    'Training-data attribution 中英文研究系列：归因单位、utility、Shapley、ablation、因果证据、样本级方法、扩展、不确定性、验证和面试叙事。',
+};
+
+const sections = [
+  {
+    part: '第一部分',
+    title: '先定义归因问题',
+    notes: [
+      ['什么是 Training Data Attribution？', '/zh/what-is-training-data-attribution'],
+      ['归因单位：从数据源到单个样本', '/zh/attribution-units-data-sources-to-examples'],
+      ['Utility Functions：我们到底在解释哪种模型行为？', '/zh/utility-functions-model-behaviours'],
+    ],
+  },
+  {
+    part: '第二部分',
+    title: 'Coalition context 下的贡献',
+    notes: [
+      ['Coalitions、边际贡献与 Shapley Values', '/zh/coalitions-marginal-contributions-shapley-values'],
+      ['Ablation vs Shapley：为什么 Coalition Context 重要', '/zh/ablation-vs-shapley-coalition-context'],
+      ['从关联到因果证据：Attribution 到底能声称什么？', '/zh/association-to-causal-evidence-attribution'],
+    ],
+  },
+  {
+    part: '第三部分',
+    title: '方法、扩展与不确定性',
+    notes: [
+      [
+        '样本级归因：Gradient Similarity、Influence Functions 与 TracIn',
+        '/zh/instance-level-attribution-gradient-influence-tracin',
+      ],
+      [
+        '扩展数据归因：Monte Carlo Shapley、Surrogate Models 与 Hierarchical Attribution',
+        '/zh/scaling-data-attribution-monte-carlo-surrogate-hierarchical',
+      ],
+      [
+        '统计可靠性：Bias、Variance、Bootstrap 与 Attribution Uncertainty',
+        '/zh/statistical-reliability-attribution-uncertainty',
+      ],
+    ],
+  },
+  {
+    part: '第四部分',
+    title: '验证与面试叙事',
+    notes: [
+      ['数据干预与 Attribution Validation', '/zh/data-intervention-and-attribution-validation'],
+      ['面试笔记：如何解释我的 Training-Data Attribution 论文', '/zh/interview-notes-training-data-attribution-thesis'],
+    ],
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="研究系列"
+    actions={[
+      {
+        variant: 'primary',
+        text: '从第一篇开始',
+        href: '/zh/what-is-training-data-attribution',
+        icon: 'tabler:git-branch',
+      },
+      { text: 'English', href: '/series/training-data-attribution' },
+      { text: 'Attribution 分类', href: '/category/explainability-and-responsible-ai' },
+    ]}
+  >
+    <Fragment slot="title">Training Data Attribution for NLP and LLM Research</Fragment>
+    <Fragment slot="subtitle">
+      这是一个面向 thesis 和面试的研究系列：归因单位、utility、Shapley、ablation、因果证据、样本级方法、
+      可扩展性、不确定性、验证，以及博士阶段可继续扩展的问题。
+    </Fragment>
+  </Hero>
+
+  <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="grid gap-6 md:grid-cols-2">
+      {
+        sections.map((section) => (
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-violet-600 dark:text-violet-300">
+              {section.part}
+            </p>
+            <h2 class="mb-4 text-2xl font-bold">{section.title}</h2>
+            <ol class="space-y-3 text-muted dark:text-slate-300">
+              {section.notes.map(([title, href], index) => (
+                <li>
+                  <a class="hover:text-primary" href={href}>
+                    {index + 1}. {title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <Features
+    title="这个系列怎么用"
+    subtitle="目标不是写成普通教程，而是让你的 thesis 更能讲清楚、更能 defend，也更容易自然延伸到 PhD。"
+    columns={3}
+    items={[
+      {
+        title: '面试可讲',
+        description: '每篇都有 spoken-style answer，可以改成项目面试或 PhD 面试里的回答。',
+        icon: 'tabler:message-2-question',
+      },
+      {
+        title: '研究边界清楚',
+        description: '系列会区分 attribution unit、utility、estimator、intervention 和 uncertainty，避免 overclaim。',
+        icon: 'tabler:microscope',
+      },
+      {
+        title: '博士方向明确',
+        description:
+          '后半部分自然指向 hierarchical attribution、intervention validation 和 LLM factuality/style attribution。',
+        icon: 'tabler:route',
+      },
+    ]}
+  />
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: '阅读第一篇',
+        href: '/zh/what-is-training-data-attribution',
+        icon: 'tabler:arrow-right',
+      },
+      { text: 'English version', href: '/series/training-data-attribution' },
+    ]}
+  >
+    <Fragment slot="title">先从“归因到底能声称什么”开始。</Fragment>
+    <Fragment slot="subtitle">强的 attribution 项目，首先要有清楚的单位、清楚的 utility 和谨慎的结论边界。</Fragment>
+  </CallToAction>
+</Layout>

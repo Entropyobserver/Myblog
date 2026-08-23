@@ -1,0 +1,154 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Training Data Attribution for NLP and LLM Research',
+  description:
+    'A bilingual research series on training-data attribution: units, utilities, Shapley values, ablation, causality, instance-level methods, scalability, uncertainty, validation, and interview notes.',
+};
+
+const sections = [
+  {
+    part: 'Part I',
+    title: 'Define the attribution problem',
+    notes: [
+      ['What Is Training Data Attribution?', '/what-is-training-data-attribution'],
+      ['Attribution Units: From Data Sources to Individual Examples', '/attribution-units-data-sources-to-examples'],
+      ['Utility Functions: Which Model Behaviours Are We Explaining?', '/utility-functions-model-behaviours'],
+    ],
+  },
+  {
+    part: 'Part II',
+    title: 'Contribution under coalition context',
+    notes: [
+      ['Coalitions, Marginal Contributions, and Shapley Values', '/coalitions-marginal-contributions-shapley-values'],
+      ['Ablation vs Shapley: Why Coalition Context Matters', '/ablation-vs-shapley-coalition-context'],
+      [
+        'From Association to Causal Evidence: What Can Attribution Claim?',
+        '/association-to-causal-evidence-attribution',
+      ],
+    ],
+  },
+  {
+    part: 'Part III',
+    title: 'Methods, scaling, and uncertainty',
+    notes: [
+      [
+        'Instance-Level Attribution: Gradient Similarity, Influence Functions, and TracIn',
+        '/instance-level-attribution-gradient-influence-tracin',
+      ],
+      [
+        'Scaling Data Attribution: Monte Carlo Shapley, Surrogate Models, and Hierarchical Attribution',
+        '/scaling-data-attribution-monte-carlo-surrogate-hierarchical',
+      ],
+      [
+        'Statistical Reliability: Bias, Variance, Bootstrap, and Attribution Uncertainty',
+        '/statistical-reliability-attribution-uncertainty',
+      ],
+    ],
+  },
+  {
+    part: 'Part IV',
+    title: 'Validation and interview narrative',
+    notes: [
+      ['Data Intervention and Attribution Validation', '/data-intervention-and-attribution-validation'],
+      [
+        'Interview Notes: Explaining My Training-Data Attribution Thesis',
+        '/interview-notes-training-data-attribution-thesis',
+      ],
+    ],
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Research series"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Start the series',
+        href: '/what-is-training-data-attribution',
+        icon: 'tabler:git-branch',
+      },
+      { text: '中文', href: '/zh/series/training-data-attribution' },
+      { text: 'Attribution category', href: '/category/explainability-and-responsible-ai' },
+    ]}
+  >
+    <Fragment slot="title">Training Data Attribution for NLP and LLM Research</Fragment>
+    <Fragment slot="subtitle">
+      A thesis- and interview-oriented path through attribution units, utilities, Shapley values, ablation, causal
+      evidence, instance-level methods, scaling, uncertainty, validation, and research extensions.
+    </Fragment>
+  </Hero>
+
+  <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="grid gap-6 md:grid-cols-2">
+      {
+        sections.map((section) => (
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-violet-600 dark:text-violet-300">
+              {section.part}
+            </p>
+            <h2 class="mb-4 text-2xl font-bold">{section.title}</h2>
+            <ol class="space-y-3 text-muted dark:text-slate-300">
+              {section.notes.map(([title, href], index) => (
+                <li>
+                  <a class="hover:text-primary" href={href}>
+                    {index + 1}. {title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <Features
+    title="How to use this series"
+    subtitle="The goal is not to sound like a generic tutorial. The goal is to make my thesis explainable, defensible, and expandable."
+    columns={3}
+    items={[
+      {
+        title: 'Interview readiness',
+        description:
+          'Each note ends with a spoken-style answer that can be adapted for project interviews and PhD discussions.',
+        icon: 'tabler:message-2-question',
+      },
+      {
+        title: 'Research precision',
+        description:
+          'The series separates attribution units, utilities, estimators, interventions, and uncertainty so the claims stay precise.',
+        icon: 'tabler:microscope',
+      },
+      {
+        title: 'PhD direction',
+        description:
+          'The later notes point toward hierarchical attribution, intervention validation, and LLM factuality/style attribution.',
+        icon: 'tabler:route',
+      },
+    ]}
+  />
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Read the first note',
+        href: '/what-is-training-data-attribution',
+        icon: 'tabler:arrow-right',
+      },
+      { text: '中文版本', href: '/zh/series/training-data-attribution' },
+    ]}
+  >
+    <Fragment slot="title">Start by defining what attribution is allowed to claim.</Fragment>
+    <Fragment slot="subtitle">
+      A strong attribution project begins with clear units, clear utilities, and careful claims.
+    </Fragment>
+  </CallToAction>
+</Layout>
