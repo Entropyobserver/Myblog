@@ -1,0 +1,133 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'LoRA for Low-Resource Domain NMT',
+  description:
+    '面向研究的 LoRA 低资源领域神经机器翻译系列：数据质量、领域适配、HPO、术语、评估和 English–Norwegian petroleum translation 项目叙事。',
+};
+
+const sections = [
+  {
+    part: '第一部分',
+    title: '研究问题',
+    notes: [
+      ['Why Low-Resource Domain MT Is Hard', '/why-low-resource-domain-mt-is-hard'],
+      ['为什么 LoRA 适合低资源领域适配', '/zh/why-lora-fits-low-resource-domain-adaptation'],
+    ],
+  },
+  {
+    part: '第二部分',
+    title: '方法与适配',
+    notes: [
+      ['LoRA for Neural Machine Translation', '/what-lora-actually-changes'],
+      ['Hyperparameter Optimization for LoRA NMT', '/hyperparameter-optimization-grid-optuna-asha'],
+      ['LoRA vs Full Fine-Tuning: What Do We Actually Save?', '/lora-vs-full-finetuning-what-do-we-save'],
+    ],
+  },
+  {
+    part: '第三部分',
+    title: 'Data-centric MT',
+    notes: [
+      ['Data Quality Diagnostics for Parallel Corpora', '/data-quality-diagnostics-for-parallel-corpora'],
+      ['领域 MT 中的术语评估问题', '/zh/terminology-evaluation-in-domain-mt'],
+      ['LoRA 领域适配中的数据规模实验', '/zh/data-scaling-for-lora-domain-adaptation'],
+    ],
+  },
+  {
+    part: '第四部分',
+    title: '评估与研究叙事',
+    notes: [
+      ['How to Evaluate Machine Translation Beyond BLEU', '/bleu-chrf-comet-practical-guide'],
+      ['我的 LoRA NMT 项目：研究问题、方法、发现与局限', '/zh/my-lora-nmt-project-research-question-method-findings'],
+    ],
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="研究系列"
+    actions={[
+      {
+        variant: 'primary',
+        text: '从第一篇开始',
+        href: '/why-low-resource-domain-mt-is-hard',
+        icon: 'tabler:language',
+      },
+      { text: 'English', href: '/series/lora-domain-nmt' },
+      { text: 'Multilingual AI', href: '/category/multilingual-ai' },
+    ]}
+  >
+    <Fragment slot="title">LoRA for Low-Resource Domain NMT</Fragment>
+    <Fragment slot="subtitle">
+      这是面向研究的路线：低资源领域 MT、LoRA 适配、数据质量、HPO、术语评估、数据规模实验，以及 English--Norwegian
+      petroleum translation 项目叙事。
+    </Fragment>
+  </Hero>
+
+  <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="grid gap-6 md:grid-cols-2">
+      {
+        sections.map((section) => (
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-violet-600 dark:text-violet-300">
+              {section.part}
+            </p>
+            <h2 class="mb-4 text-2xl font-bold">{section.title}</h2>
+            <ol class="space-y-3 text-muted dark:text-slate-300">
+              {section.notes.map(([title, href], index) => (
+                <li>
+                  <a class="hover:text-primary" href={href}>
+                    {index + 1}. {title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <Features
+    title="为什么它属于 Research，而不是 Foundations"
+    subtitle="这里当然有数学，但数学服务于研究论证：为什么选择这个方法、这个数据、这个评估协议。"
+    columns={3}
+    items={[
+      {
+        title: '问题驱动',
+        description: '系列从低资源领域 MT 和技术风险开始，而不是从抽象线性代数开始。',
+        icon: 'tabler:target-arrow',
+      },
+      {
+        title: '方法意识',
+        description: 'LoRA 通过 adaptation capacity、controlled updates、HPO 和 full fine-tuning trade-off 来解释。',
+        icon: 'tabler:adjustments',
+      },
+      {
+        title: '评估导向',
+        description: 'BLEU、chrF、COMET、术语指标和人类错误分析都被当成 evidence design。',
+        icon: 'tabler:chart-dots-3',
+      },
+    ]}
+  />
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: '阅读项目总结',
+        href: '/zh/my-lora-nmt-project-research-question-method-findings',
+        icon: 'tabler:arrow-right',
+      },
+      { text: 'English version', href: '/series/lora-domain-nmt' },
+    ]}
+  >
+    <Fragment slot="title">这个系列最后会落到 thesis-style research narrative。</Fragment>
+    <Fragment slot="subtitle">它的目的就是帮助你在面试和 PhD conversation 中把项目讲清楚。</Fragment>
+  </CallToAction>
+</Layout>

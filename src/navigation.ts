@@ -59,6 +59,10 @@ export const headerData = {
           href: getPermalink('multilingual-ai', 'category'),
         },
         {
+          text: 'LoRA Domain NMT',
+          href: getPermalink('/series/lora-domain-nmt'),
+        },
+        {
           text: 'Model Evaluation',
           href: getPermalink('model-evaluation', 'category'),
         },
@@ -107,6 +111,7 @@ export const footerData = {
       title: 'Research',
       links: [
         { text: 'Multilingual AI', href: getPermalink('multilingual-ai', 'category') },
+        { text: 'LoRA Domain NMT', href: getPermalink('/series/lora-domain-nmt') },
         { text: 'Model Evaluation', href: getPermalink('model-evaluation', 'category') },
         { text: 'Responsible AI', href: getPermalink('explainability-and-responsible-ai', 'category') },
         { text: 'Training Data Attribution', href: getPermalink('/series/training-data-attribution') },
