@@ -62,16 +62,16 @@ translationLabel: 'English'
 
 技术核心是冻结 base model，在选定模块中学习低秩更新：
 
-\[
+$$
 W' = W + BA
-\]
+$$
 
 这是一种受控适配机制。模型不是更新所有参数，而是学习一个更小的更新，这个更新可能足以捕捉领域术语和风格。
 
 核心超参数包括：
 
-- rank \(r\)：控制 update capacity；
-- alpha \(\alpha\)：控制 update scale；
+- rank $r$：控制 update capacity；
+- alpha $\alpha$：控制 update scale；
 - dropout：对 adapter 做 regularization；
 - target modules：决定 LoRA 插入哪里。
 

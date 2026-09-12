@@ -62,16 +62,16 @@ The method is LoRA-based adaptation of a pretrained MT model.
 
 The technical idea is to freeze the base model and learn low-rank updates in selected modules:
 
-\[
+$$
 W' = W + BA
-\]
+$$
 
 This creates a controlled adaptation mechanism. Instead of updating all parameters, the model learns a smaller update that may be sufficient for domain-specific terminology and style.
 
 The core hyperparameters include:
 
-- rank \(r\), which controls update capacity;
-- alpha \(\alpha\), which controls update scale;
+- rank $r$, which controls update capacity;
+- alpha $\alpha$, which controls update scale;
 - dropout, which can regularise the adapter;
 - target modules, which determine where adaptation is inserted.
 

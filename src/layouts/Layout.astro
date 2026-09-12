@@ -1,5 +1,6 @@
 ---
 import '~/assets/styles/tailwind.css';
+import 'katex/dist/katex.min.css';
 
 import { Font } from 'astro:assets';
 
@@ -28,7 +29,7 @@ const { language, textDirection } = I18N;
 ---
 
 <!doctype html>
-<html lang={language} dir={textDirection} class="2xl:text-[20px]">
+<html lang={language} dir={textDirection} class="text-[15px]">
   <head>
     <CommonMeta />
     <Favicons />

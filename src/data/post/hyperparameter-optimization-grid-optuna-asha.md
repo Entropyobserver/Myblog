@@ -1,13 +1,13 @@
 ---
-title: "Hyperparameter Optimization with Grid Search and Optuna/ASHA"
+title: 'Hyperparameter Optimization with Grid Search and Optuna/ASHA'
 publishDate: 2026-08-13
-excerpt: "A practical research-engineering note on tuning LoRA rank, alpha, dropout, Pareto selection, ASHA pruning, and fANOVA analysis."
-category: "Research Engineering"
-track: "Foundations"
-tags: ["Hyperparameter Optimization", "Optuna", "ASHA", "LoRA", "fANOVA"]
-language: "bilingual"
-author: "Xiaojing Yang"
-summary_zh: "这篇文章解释如何用 grid search 和 Optuna/ASHA 调 LoRA 超参数，并用 fANOVA 理解哪些参数真正影响性能。"
+excerpt: 'A practical research-engineering note on tuning LoRA rank, alpha, dropout, Pareto selection, ASHA pruning, and fANOVA analysis.'
+category: 'Research Engineering'
+track: 'Foundations'
+tags: ['Hyperparameter Optimization', 'Optuna', 'ASHA', 'LoRA', 'fANOVA']
+language: 'bilingual'
+author: 'Xiaojing Yang'
+summary_zh: '这篇文章解释如何用 grid search 和 Optuna/ASHA 调 LoRA 超参数，并用 fANOVA 理解哪些参数真正影响性能。'
 ---
 
 ## 中文导读
@@ -20,7 +20,7 @@ summary_zh: "这篇文章解释如何用 grid search 和 Optuna/ASHA 调 LoRA �
 
 LoRA has fewer trainable parameters than full fine-tuning, but it still has important hyperparameters.
 
-The most important ones are rank \(r\), scaling factor \(\alpha\), dropout, target modules, learning rate, and training schedule.
+The most important ones are rank $r$, scaling factor $\alpha$, dropout, target modules, learning rate, and training schedule.
 
 In a low-resource setting, small hyperparameter choices can have visible effects because the model has limited training signal.
 
@@ -30,9 +30,9 @@ Grid search tries a fixed set of configurations. It is not the most efficient me
 
 For example, we can compare configurations like:
 
-- \(r = 4, 8, 16\);
-- \(\alpha = 16, 32, 64\);
-- dropout \(= 0, 0.05, 0.1\).
+- $r = 4, 8, 16$;
+- $\alpha = 16, 32, 64$;
+- dropout $= 0, 0.05, 0.1$.
 
 This makes it easier to see broad patterns. Does higher rank help? Does dropout regularize or hurt? Does alpha dominate? Are there interactions between rank and alpha?
 
@@ -80,15 +80,15 @@ In my experiments, alpha explained most of the performance variation. This was i
 
 The LoRA update is scaled by:
 
-\[
+$$
 \frac{\alpha}{r}
-\]
+$$
 
 So alpha controls how strongly the adapter modifies the frozen base model.
 
 ## Why dropout can be zero
 
-It may feel counterintuitive that dropout \(=0\) can work well, because dropout is usually associated with preventing overfitting.
+It may feel counterintuitive that dropout $=0$ can work well, because dropout is usually associated with preventing overfitting.
 
 But LoRA is already constrained: the base model is frozen, only a small number of parameters are trainable, and the update is low-rank.
 
@@ -110,4 +110,3 @@ From this project, my HPO takeaways are:
 Hyperparameter optimization should not be only a leaderboard exercise.
 
 For research engineering, HPO is also a way to understand the behavior of the adaptation method. In my LoRA NMT project, the most useful result was not only the final configuration, but the insight that alpha dominated the adaptation landscape.
-

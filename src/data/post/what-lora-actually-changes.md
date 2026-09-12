@@ -1,13 +1,13 @@
 ---
-title: "LoRA for Neural Machine Translation"
+title: 'LoRA for Neural Machine Translation'
 publishDate: 2026-08-15
-excerpt: "A practical explanation of LoRA for NMT: what it changes, why it is useful for domain adaptation, and how it differs from full fine-tuning."
-category: "NLP & LLMs"
-track: "Foundations"
-tags: ["LoRA", "Fine-tuning", "PEFT", "Machine Translation"]
-language: "bilingual"
-author: "Xiaojing Yang"
-summary_zh: "LoRA 不是重新训练整个模型，而是在冻结模型上学习低秩更新；这让它特别适合低资源领域机器翻译的适配实验。"
+excerpt: 'A practical explanation of LoRA for NMT: what it changes, why it is useful for domain adaptation, and how it differs from full fine-tuning.'
+category: 'NLP & LLMs'
+track: 'Foundations'
+tags: ['LoRA', 'Fine-tuning', 'PEFT', 'Machine Translation']
+language: 'bilingual'
+author: 'Xiaojing Yang'
+summary_zh: 'LoRA 不是重新训练整个模型，而是在冻结模型上学习低秩更新；这让它特别适合低资源领域机器翻译的适配实验。'
 ---
 
 ## 中文导读
@@ -26,27 +26,27 @@ Full fine-tuning updates all model parameters. For a large translation model, th
 
 LoRA takes a different approach. Instead of updating the full weight matrix, it freezes the pretrained model and learns a small low-rank update.
 
-Conceptually, if a model has a weight matrix \(W\), LoRA keeps \(W\) frozen and adds a learned update:
+Conceptually, if a model has a weight matrix $W$, LoRA keeps $W$ frozen and adds a learned update:
 
-\[
+$$
 W' = W + \Delta W
-\]
+$$
 
-Instead of learning a full \(\Delta W\), LoRA decomposes it into two smaller matrices:
+Instead of learning a full $\Delta W$, LoRA decomposes it into two smaller matrices:
 
-\[
+$$
 \Delta W = BA
-\]
+$$
 
-where the rank \(r\) controls the size of the update space.
+where the rank $r$ controls the size of the update space.
 
 In practice, the update is usually scaled:
 
-\[
+$$
 W' = W + \frac{\alpha}{r}BA
-\]
+$$
 
-This is where the LoRA scaling factor \(\alpha\) becomes important.
+This is where the LoRA scaling factor $\alpha$ becomes important.
 
 ## Why low-rank adaptation can work
 
@@ -81,12 +81,12 @@ One could also apply LoRA to feed-forward layers, but that increases the number 
 
 The most visible LoRA hyperparameters are:
 
-- **rank \(r\)**: the dimensionality of the low-rank update;
-- **alpha \(\alpha\)**: the scaling factor for the update;
+- **rank $r$**: the dimensionality of the low-rank update;
+- **alpha $\alpha$**: the scaling factor for the update;
 - **dropout**: regularization applied inside the adapter;
 - **target modules**: which layers receive LoRA updates.
 
-In my experiments, \(r=8\), \(\alpha=64\), and dropout \(=0\) emerged as a strong configuration. The interesting part was not only the final setting, but the fact that alpha dominated the hyperparameter landscape.
+In my experiments, $r=8$, $\alpha=64$, and dropout $=0$ emerged as a strong configuration. The interesting part was not only the final setting, but the fact that alpha dominated the hyperparameter landscape.
 
 This suggests that, in this domain adaptation setting, the magnitude of the update mattered more than simply increasing the rank.
 
@@ -116,4 +116,3 @@ LoRA is useful for neural machine translation because it gives us a practical mi
 - controlled enough for low-resource experiments.
 
 For domain MT, I see LoRA less as a shortcut and more as an experimental tool: it lets us study how much adaptation is possible when data and compute are limited.
-

@@ -39,19 +39,19 @@ If I had a large, clean, representative petroleum MT corpus, full fine-tuning mi
 
 ## The technical core: controlled parameter updates
 
-LoRA freezes the pretrained weight matrix \(W\) and learns a low-rank update:
+LoRA freezes the pretrained weight matrix $W$ and learns a low-rank update:
 
-\[
+$$
 W' = W + \Delta W
-\]
+$$
 
 Instead of learning a full update matrix, LoRA parameterizes the update as:
 
-\[
+$$
 \Delta W = BA
-\]
+$$
 
-where \(A\) and \(B\) are much smaller matrices. The rank \(r\) controls the size of the update space, and \(\alpha\) scales the update.
+where $A$ and $B$ are much smaller matrices. The rank $r$ controls the size of the update space, and $\alpha$ scales the update.
 
 The research interpretation is important: LoRA limits how much the model can change. That limitation can be useful when the training corpus is small. It gives the model enough freedom to adapt, but not unlimited freedom to memorize the domain sample.
 

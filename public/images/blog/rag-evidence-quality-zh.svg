@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760" role="img" aria-labelledby="title desc">
+  <title id="title">检索证据质量决定 RAG 答案上限</title>
+  <desc id="desc">同一个问题在正确、部分、错误和没有证据的情况下会产生可靠、不完整、错误或拒答结果。</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f8fafc"/><stop offset="1" stop-color="#f1f5f9"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="7" stdDeviation="11" flood-color="#0f172a" flood-opacity=".09"/></filter><style>.t{font:700 38px Inter,"Microsoft YaHei",sans-serif;fill:#0f172a}.h{font:700 23px Inter,"Microsoft YaHei",sans-serif;fill:#0f172a}.b{font:400 17px Inter,"Microsoft YaHei",sans-serif;fill:#475569}.ok{font:700 17px Inter,"Microsoft YaHei",sans-serif;fill:#15803d}.warn{font:700 17px Inter,"Microsoft YaHei",sans-serif;fill:#b45309}.bad{font:700 17px Inter,"Microsoft YaHei",sans-serif;fill:#b91c1c}</style></defs>
+  <rect width="1400" height="760" rx="28" fill="url(#bg)"/>
+  <text x="70" y="74" class="t">检索结果决定了生成模型能够回答到什么程度</text>
+  <text x="70" y="112" class="b">同一个 LLM、同一个问题，仅仅改变提供的证据。</text>
+  <g filter="url(#s)"><rect x="70" y="155" width="1260" height="100" rx="22" fill="#fff" stroke="#bfdbfe" stroke-width="2"/></g>
+  <text x="110" y="195" class="h">问题</text><text x="210" y="195" class="b">2017 年，安哥拉 Blocks 17、15 和 31 占挪威境外权益液体产量的比例是多少？</text>
+  <text x="210" y="228" class="b">回答需要：正确年份 + 正确表格 + 正确数字</text>
+  <g filter="url(#s)">
+    <rect x="70" y="305" width="285" height="330" rx="22" fill="#fff" stroke="#86efac" stroke-width="2"/>
+    <circle cx="115" cy="350" r="22" fill="#dcfce7"/><text x="115" y="358" text-anchor="middle" class="ok">✓</text>
+    <text x="155" y="358" class="h">正确且完整</text>
+    <rect x="105" y="395" width="215" height="105" rx="15" fill="#f0fdf4"/><text x="212" y="430" text-anchor="middle" class="b">2017 年报告，第 33 页</text><text x="212" y="462" text-anchor="middle" class="h">36%</text>
+    <text x="212" y="545" text-anchor="middle" class="ok">可靠回答 + 引用</text><text x="212" y="585" text-anchor="middle" class="b">证据支持完整结论</text>
+    <rect x="385" y="305" width="285" height="330" rx="22" fill="#fff" stroke="#fcd34d" stroke-width="2"/>
+    <circle cx="430" cy="350" r="22" fill="#fef3c7"/><text x="430" y="358" text-anchor="middle" class="warn">!</text>
+    <text x="470" y="358" class="h">只有部分证据</text>
+    <rect x="420" y="395" width="215" height="105" rx="15" fill="#fffbeb"/><text x="527" y="430" text-anchor="middle" class="b">找到解释段落</text><text x="527" y="462" text-anchor="middle" class="b">没有找到数字表格</text>
+    <text x="527" y="545" text-anchor="middle" class="warn">回答不完整</text><text x="527" y="585" text-anchor="middle" class="b">主题相关但无法填全</text>
+    <rect x="700" y="305" width="285" height="330" rx="22" fill="#fff" stroke="#fca5a5" stroke-width="2"/>
+    <circle cx="745" cy="350" r="22" fill="#fee2e2"/><text x="745" y="358" text-anchor="middle" class="bad">×</text>
+    <text x="785" y="358" class="h">错误证据</text>
+    <rect x="735" y="395" width="215" height="105" rx="15" fill="#fef2f2"/><text x="842" y="430" text-anchor="middle" class="b">其他年份的相似指标</text><text x="842" y="462" text-anchor="middle" class="b">语义相关，但年份错误</text>
+    <text x="842" y="545" text-anchor="middle" class="bad">可能生成错误答案</text><text x="842" y="585" text-anchor="middle" class="b">流畅不代表有依据</text>
+    <rect x="1015" y="305" width="315" height="330" rx="22" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+    <circle cx="1060" cy="350" r="22" fill="#e2e8f0"/><text x="1060" y="358" text-anchor="middle" class="h">?</text>
+    <text x="1100" y="358" class="h">没有充分证据</text>
+    <rect x="1050" y="395" width="245" height="105" rx="15" fill="#f8fafc"/><text x="1172" y="430" text-anchor="middle" class="b">Top-k 中没有答案依据</text><text x="1172" y="462" text-anchor="middle" class="b">或问题本身不可回答</text>
+    <text x="1172" y="545" text-anchor="middle" class="h">应当拒答或重试</text><text x="1172" y="585" text-anchor="middle" class="b">不要让模型自行补全事实</text>
+  </g>
+  <text x="700" y="704" text-anchor="middle" class="h">RAG 的可靠性上限，首先受检索证据质量限制。</text>
+</svg>
