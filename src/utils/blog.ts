@@ -60,6 +60,10 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     translationKey,
     translationHref,
     translationLabel,
+    series,
+    seriesOrder,
+    seriesTotal,
+    seriesHref,
     draft = false,
     metadata = {},
   } = data;
@@ -102,6 +106,10 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     translationKey,
     translationHref,
     translationLabel,
+    series,
+    seriesOrder,
+    seriesTotal,
+    seriesHref,
 
     draft: draft,
 
@@ -151,6 +159,11 @@ export const fetchPosts = async (): Promise<Array<Post>> => {
   return _posts;
 };
 
+/** Posts shown on the default English site. */
+export const fetchEnglishPosts = async (): Promise<Array<Post>> => {
+  return (await fetchPosts()).filter((post) => post.language === 'en');
+};
+
 /** */
 export const findPostsBySlugs = async (slugs: Array<string>): Promise<Array<Post>> => {
   if (!Array.isArray(slugs)) return [];
@@ -182,7 +195,7 @@ export const findPostsByIds = async (ids: Array<string>): Promise<Array<Post>> =
 /** */
 export const findLatestPosts = async ({ count }: { count?: number }): Promise<Array<Post>> => {
   const _count = count || 4;
-  const posts = await fetchPosts();
+  const posts = await fetchEnglishPosts();
 
   return posts ? posts.slice(0, _count) : [];
 };
@@ -190,7 +203,7 @@ export const findLatestPosts = async ({ count }: { count?: number }): Promise<Ar
 /** */
 export const getStaticPathsBlogList = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogListRouteEnabled) return [];
-  return paginate(await fetchPosts(), {
+  return paginate(await fetchEnglishPosts(), {
     params: { blog: BLOG_BASE || undefined },
     pageSize: blogPostsPerPage,
   });
@@ -211,7 +224,7 @@ export const getStaticPathsBlogPost = async () => {
 export const getStaticPathsBlogCategory = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogCategoryRouteEnabled) return [];
 
-  const posts = await fetchPosts();
+  const posts = await fetchEnglishPosts();
   const categories: Record<string, Taxonomy> = {};
   posts.map((post) => {
     if (post.category?.slug) {
@@ -235,7 +248,7 @@ export const getStaticPathsBlogCategory = async ({ paginate }: { paginate: Pagin
 export const getStaticPathsBlogTag = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogTagRouteEnabled) return [];
 
-  const posts = await fetchPosts();
+  const posts = await fetchEnglishPosts();
   const tags: Record<string, Taxonomy> = {};
   posts.map((post) => {
     if (Array.isArray(post.tags)) {
@@ -259,7 +272,7 @@ export const getStaticPathsBlogTag = async ({ paginate }: { paginate: PaginateFu
 
 /** */
 export async function getRelatedPosts(originalPost: Post, maxResults: number = 4): Promise<Post[]> {
-  const allPosts = await fetchPosts();
+  const allPosts = (await fetchPosts()).filter((post) => post.language === originalPost.language);
   const originalTagsSet = new Set(originalPost.tags ? originalPost.tags.map((tag) => tag.slug) : []);
 
   const postsWithScores = allPosts.reduce((acc: { post: Post; score: number }[], iteratedPost: Post) => {

@@ -10,6 +10,10 @@ author: 'Xiaojing Yang'
 translationKey: 'how-documents-enter-rag-pdf-chunk-metadata-index'
 translationHref: '/zh/how-documents-enter-rag-pdf-chunk-metadata-index'
 translationLabel: '中文'
+series: 'RAG Foundations'
+seriesOrder: 2
+seriesTotal: 6
+seriesHref: '/series/rag-foundations'
 ---
 
 <div class="my-8 rounded-2xl border border-blue-200 bg-blue-50 p-5 dark:border-blue-900 dark:bg-blue-950/40">
@@ -23,7 +27,7 @@ The previous article introduced the [basic RAG pipeline](/what-is-rag-from-retri
 
 If reading order is wrong, a table collapses into noise, or headings lose their relation to paragraphs, embeddings and rerankers can only process damaged input.
 
-![The complete path from PDF to retrievable evidence](/images/blog/document-to-rag-evidence.svg)
+![The complete path from PDF to retrievable evidence](/images/blog/document-to-rag-evidence-en.svg)
 
 ## 1. Why is a PDF not naturally “text”?
 
@@ -53,7 +57,7 @@ An evidence object reflects source structure—a paragraph, table, or heading. A
 
 A short paragraph may become one chunk. A long table may produce several chunks. Several short paragraphs under one heading may be merged. Even after splitting or merging, every chunk should map back to its source objects.
 
-![Trade-offs between small, large, and structure-aware chunks](/images/blog/chunking-tradeoffs.svg)
+![Trade-offs between small, large, and structure-aware chunks](/images/blog/chunking-tradeoffs-en.svg)
 
 ## 4. The chunking trade-off
 
@@ -86,7 +90,7 @@ Metadata records structured facts about content:
 
 It serves two roles. As **provenance**, it lets an answer cite the report, year, page, and source object. As a **retrieval signal**, it can filter the corpus before relevance ranking. In longitudinal reports, an explicit year constraint can be more reliable than semantic similarity alone.
 
-![Metadata used for filtering, ranking, and citation](/images/blog/metadata-as-retrieval-signal.svg)
+![Metadata used for filtering, ranking, and citation](/images/blog/metadata-as-retrieval-signal-en.svg)
 
 Metadata should be grounded in verifiable document information. Fields inferred by an LLM need recorded provenance and confidence; they should not silently become facts.
 
@@ -134,3 +138,8 @@ In the [FinRAG project](/building-finrag-evidence-grounded-retrieval-for-annual-
 - [Docling: Chunking concepts](https://docling-project.github.io/docling/concepts/chunking/)
 - [Docling: Architecture](https://docling-project.github.io/docling/concepts/architecture/)
 - [Docling Technical Report](https://arxiv.org/abs/2408.09869)
+
+<div class="my-10 flex flex-col gap-3 border-t border-slate-200 pt-6 dark:border-slate-700 sm:flex-row sm:justify-between">
+  <a href="/what-is-rag-from-retrieval-to-grounded-answer">← 1. What is RAG?</a>
+  <a href="/keyword-vs-vector-retrieval">3. Keyword search vs vector search →</a>
+</div>

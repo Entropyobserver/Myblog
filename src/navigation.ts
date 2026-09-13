@@ -33,6 +33,10 @@ export const headerData = {
           text: 'Research Engineering',
           href: getPermalink('research-engineering', 'category'),
         },
+        {
+          text: 'RAG Foundations · 6 parts',
+          href: getPermalink('/series/rag-foundations'),
+        },
       ],
     },
     {
@@ -90,6 +94,7 @@ export const footerData = {
         { text: 'Machine Learning', href: getPermalink('machine-learning', 'category') },
         { text: 'NLP & LLMs', href: getPermalink('nlp-and-llms', 'category') },
         { text: 'Research Engineering', href: getPermalink('research-engineering', 'category') },
+        { text: 'RAG Foundations · 6 parts', href: getPermalink('/series/rag-foundations') },
       ],
     },
     {

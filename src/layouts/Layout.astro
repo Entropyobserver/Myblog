@@ -26,10 +26,11 @@ export interface Props {
 
 const { metadata = {} } = Astro.props;
 const { language, textDirection } = I18N;
+const pageLanguage = Astro.url.pathname.startsWith('/zh/') ? 'zh' : language;
 ---
 
 <!doctype html>
-<html lang={language} dir={textDirection} class="text-[15px]">
+<html lang={pageLanguage} dir={textDirection} class="text-[15px]">
   <head>
     <CommonMeta />
     <Favicons />

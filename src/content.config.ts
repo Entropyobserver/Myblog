@@ -68,6 +68,10 @@ const postCollection = defineCollection({
     translationKey: z.string().optional(),
     translationHref: z.string().optional(),
     translationLabel: z.string().optional(),
+    series: z.string().optional(),
+    seriesOrder: z.number().int().positive().optional(),
+    seriesTotal: z.number().int().positive().optional(),
+    seriesHref: z.string().optional(),
 
     metadata: metadataDefinition(),
   }),

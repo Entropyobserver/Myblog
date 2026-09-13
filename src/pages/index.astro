@@ -5,31 +5,36 @@ import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import KnowledgePath from '~/components/home/KnowledgePath.astro';
 
 const metadata = {
   title: 'Xiaojing Yang · AI Research Notes',
   ignoreTitleTemplate: true,
   description:
-    'Bilingual foundations and research notes on mathematics, statistics, machine learning, NLP, LLMs, model evaluation, and applied AI systems.',
+    'Foundations and research notes on mathematics, statistics, machine learning, NLP, LLMs, model evaluation, and applied AI systems.',
 };
 ---
 
 <Layout metadata={metadata}>
   <Hero
-    tagline="Foundations + Research"
+    tagline="Xiaojing Yang · AI Research Notes"
     actions={[
       { variant: 'primary', text: 'Read the Blog', href: '/blog', icon: 'tabler:book-2' },
       { text: 'View Portfolio ↗', href: 'https://nordic-ai.top', target: '_blank' },
     ]}
   >
     <Fragment slot="title">
-      Xiaojing Yang
-      <span class="block text-accent dark:text-white">from foundations to applied systems</span>
+      Foundations that lead to
+      <span class="block text-accent dark:text-white">reliable AI systems.</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      A bilingual knowledge base on mathematics, statistics, machine learning, NLP, LLMs, model evaluation, and applied
-      AI research. The goal is simple: make the foundations reusable, then connect them to real experiments.
+      Clear, reusable notes on mathematics, statistics, machine learning, NLP, and LLMs—connected to real experiments in
+      evaluation, multilingual AI, retrieval, and applied ML.
+    </Fragment>
+
+    <Fragment slot="image">
+      <KnowledgePath />
     </Fragment>
   </Hero>
 
@@ -130,7 +135,7 @@ const metadata = {
   <BlogLatestPosts
     title="Latest notes"
     count={6}
-    information="Posts may be in English, Chinese, or bilingual. Foundations posts often start from strong public resources; research posts connect those foundations to my own experiments."
+    information="Foundations posts build reusable mental models; research posts connect them to experiments, evidence, and real systems. Chinese translations are available from the language switch on selected articles."
   />
 
   <CallToAction

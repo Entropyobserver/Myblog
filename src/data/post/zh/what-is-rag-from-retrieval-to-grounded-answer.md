@@ -11,6 +11,10 @@ author: 'Xiaojing Yang'
 translationKey: 'what-is-rag-from-retrieval-to-grounded-answer'
 translationHref: '/what-is-rag-from-retrieval-to-grounded-answer'
 translationLabel: 'English'
+series: 'RAG 基础'
+seriesOrder: 1
+seriesTotal: 6
+seriesHref: '/zh/series/rag-foundations'
 ---
 
 ## 1. 什么是 RAG？
@@ -97,10 +101,15 @@ RAG 把“知识存在哪里”与“如何表达答案”分开：外部知识�
 
 图中最容易混淆的五个对象，可以记成一条逐步收窄的链：
 
-```text
-Document → Chunk → Candidate → Context → Answer
-原始来源     检索单元    可能相关结果    选定证据     最终输出
-```
+**Document → Chunk → Candidate → Context → Answer**
+
+| 顺序 | 对象      | 含义         |
+| ---- | --------- | ------------ |
+| 1    | Document  | 原始来源     |
+| 2    | Chunk     | 检索单元     |
+| 3    | Candidate | 可能相关结果 |
+| 4    | Context   | 选定证据     |
+| 5    | Answer    | 最终输出     |
 
 因此，**Candidate 不等于正确证据，Context 也不一定充分。** 如果文档解析时漏掉一张表格，它就不会成为 Chunk，也不会进入 Index；Retriever 找不到它，Generator 最终也看不到它。这正是为什么 RAG 的可靠性取决于整套系统，而不只取决于最后的语言模型。
 
@@ -252,43 +261,19 @@ Generator 通常是一个语言模型。它读取问题和检索上下文，然�
 
 ## 7. 如何评价一个 RAG 系统？
 
-只看最终答案，会隐藏错误发生在哪一层。更清楚的做法是分别评价三层。
+只看最终答案，会隐藏错误发生在哪一层。一个实用的诊断方法是分别评价三层：
 
-![RAG 的检索、证据和答案三层评估](/images/blog/rag-three-level-evaluation.svg)
+![RAG 的检索、证据和答案三层评估](/images/blog/rag-three-level-evaluation-zh.svg)
 
-### Retrieval quality
+| 层级      | 核心问题                                           |
+| --------- | -------------------------------------------------- |
+| Retrieval | 正确内容是否进入 Top-k，而且重要结果是否排在前面？ |
+| Evidence  | 选中的证据是否正确、充分、完整，并且可以追溯？     |
+| Answer    | 最终答案是否正确、忠实于证据，而且提供了有效引用？ |
 
-- **Precision@k**：Top-k 中有多少比例是相关结果；
-- **Recall@k**：全部已知相关证据中，有多少进入 Top-k；
-- **MRR**：第一个相关结果出现得有多靠前；
-- **nDCG**：考虑不同相关程度和排名位置的总体质量。
+对于贯穿全文的年报问题，这三层对应三个具体检查：Retriever 是否找到了 2017 年表格，Context 是否包含计算所需的全部事实，Generator 是否得到 36% 并正确引用第 33 页。
 
-若问题需要的 gold evidence 集合为 $G_q$，Top-k 结果为 $R_q^k$，则：
-
-$$
-\operatorname{Recall@k}(q)=\frac{|G_q\cap R_q^k|}{|G_q|}
-$$
-
-### Evidence quality
-
-普通 Recall@k 仍可能掩盖 multi-hop failure。一个问题需要 A、B、C 三项证据，只找到 A 和 B 时，object recall 是 $2/3$，但问题仍无法被完整回答。因此还要区分：
-
-- **Any-evidence hit**：至少找到一个必要证据；
-- **Complete-evidence hit**：所有必要证据都进入 Top-k；
-- 报告、年份、页面和对象是否正确；
-- 引用是否真的支持对应结论。
-
-### Answer quality
-
-最后才评价 correctness、relevance、faithfulness、groundedness 和 citation correctness。一个答案可能因模型记忆而偶然正确，却引用了错误页面；也可能检索完全正确，但生成器算错数字。两者需要分别诊断。
-
-对于贯穿全文的例子，现在可以分别提出三个评价问题：
-
-1. **Retrieval**：系统是否找到了正确的 2017 年报告和表格，而不是其他年份的相似表格？
-2. **Evidence**：计算该占比所需的行或事实是否全部找到，并且页码与 metadata 是否正确？
-3. **Answer**：Generator 是否得到 36%，正确理解了表格，并引用了第 33 页？
-
-这就是从 **relevant** 到 **correct**、**sufficient**、**complete**，最后到 **grounded** 的递进关系。
+答案正确仍可能掩盖错误证据，检索正确之后也可能发生计算错误。独立文章[《如何评价一个检索系统？》](/zh/evaluating-retrieval-systems)将详细解释 Precision、Recall、MRR、nDCG、证据完整性、groundedness 与引用评价。
 
 ## 8. RAG、搜索和微调有什么区别？
 
@@ -380,3 +365,7 @@ $$
 - [Microsoft Learn：检索增强生成基础概念](https://learn.microsoft.com/zh-cn/training/modules/rag-fundamentals/)
 - [Lewis et al. (2020)：Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401)
 - [Microsoft Learn：RAG 和索引](https://learn.microsoft.com/zh-cn/azure/foundry/concepts/retrieval-augmented-generation)
+
+<div class="my-10 flex flex-col gap-3 border-t border-slate-200 pt-6 dark:border-slate-700 sm:flex-row sm:justify-end">
+  <a href="/zh/how-documents-enter-rag-pdf-chunk-metadata-index">2. 文档如何进入 RAG →</a>
+</div>

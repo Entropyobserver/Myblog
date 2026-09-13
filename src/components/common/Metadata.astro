@@ -23,13 +23,14 @@ const {
   openGraph = {},
   twitter = {},
 } = Astro.props;
+const pageLocale = Astro.url.pathname.startsWith('/zh/') ? 'zh_CN' : I18N?.language || 'en';
 
 const mergedOg: MetaDataOpenGraph = merge(
   {
     url: canonical,
     siteName: SITE?.name,
     images: [],
-    locale: I18N?.language || 'en',
+    locale: pageLocale,
     type: 'website',
   },
   METADATA?.openGraph,

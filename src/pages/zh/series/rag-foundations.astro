@@ -1,0 +1,88 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+
+const metadata = {
+  title: 'RAG 基础系列',
+  description: '用六篇图解文章理解 RAG、文档处理、检索、重排序、评价和多步骤系统。',
+};
+
+const articles = [
+  {
+    number: 1,
+    title: '什么是 RAG？',
+    description: '检索、增强、生成、grounding，以及模型与系统之间的区别。',
+    href: '/zh/what-is-rag-from-retrieval-to-grounded-answer',
+  },
+  {
+    number: 2,
+    title: '文档如何进入 RAG？',
+    description: 'PDF extraction、evidence objects、chunking、metadata、embeddings 与 indexes。',
+    href: '/zh/how-documents-enter-rag-pdf-chunk-metadata-index',
+  },
+  {
+    number: 3,
+    title: '关键词检索与向量检索',
+    description: '倒排索引、BM25、embedding、dense retrieval 与互补的失败模式。',
+    href: '/zh/keyword-vs-vector-retrieval',
+  },
+  {
+    number: 4,
+    title: 'Hybrid Retrieval 与 Reranking',
+    description: 'Candidate generation、RRF、去重、cross-encoder 与 recall ceiling。',
+    href: '/zh/hybrid-retrieval-and-reranking',
+  },
+  {
+    number: 5,
+    title: '如何评价一个检索系统？',
+    description: 'Precision、Recall、MRR、nDCG、gold evidence 与证据完整性。',
+    href: '/zh/evaluating-retrieval-systems',
+  },
+  {
+    number: 6,
+    title: 'Multi-hop、GraphRAG 与 Agentic RAG',
+    description: 'Query planning、graph traversal、迭代检索、验证、retry 与停止条件。',
+    href: '/zh/multi-hop-graphrag-and-agentic-rag',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="RAG 基础 · 六篇系列"
+    actions={[
+      { variant: 'primary', text: '从第 1 篇开始', href: articles[0].href, icon: 'tabler:arrow-right' },
+      { text: 'English version', href: '/series/rag-foundations' },
+    ]}
+  >
+    <Fragment slot="title">从文档处理到可靠的检索系统。</Fragment>
+    <Fragment slot="subtitle">
+      六篇图解文章建立一条连续主线：理解
+      RAG、准备证据、检索候选、融合与重排序、评价检索结果，最后处理一次搜索无法回答的问题。
+    </Fragment>
+  </Hero>
+
+  <section class="mx-auto max-w-4xl px-4 pb-20 sm:px-6">
+    <div
+      class="relative space-y-5 before:absolute before:bottom-8 before:left-6 before:top-8 before:w-px before:bg-slate-200 dark:before:bg-slate-700 sm:before:left-8"
+    >
+      {
+        articles.map((article) => (
+          <a
+            class="relative grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 pl-16 transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-900 dark:hover:border-blue-700 sm:grid-cols-[1fr_auto] sm:items-center sm:p-6 sm:pl-20"
+            href={article.href}
+          >
+            <span class="absolute left-3.5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-primary font-bold text-white sm:left-3 sm:top-6 sm:h-12 sm:w-12">
+              {article.number}
+            </span>
+            <span>
+              <span class="block font-heading text-xl font-bold text-slate-900 dark:text-white">{article.title}</span>
+              <span class="mt-2 block leading-7 text-muted dark:text-slate-300">{article.description}</span>
+            </span>
+            <span class="font-semibold text-primary">阅读 →</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</Layout>

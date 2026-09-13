@@ -27,6 +27,10 @@ export interface Post {
   translationKey?: string;
   translationHref?: string;
   translationLabel?: string;
+  series?: string;
+  seriesOrder?: number;
+  seriesTotal?: number;
+  seriesHref?: string;
 
   metadata?: MetaData;
 

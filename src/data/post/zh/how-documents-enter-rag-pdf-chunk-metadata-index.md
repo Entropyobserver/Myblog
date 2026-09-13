@@ -10,6 +10,10 @@ author: 'Xiaojing Yang'
 translationKey: 'how-documents-enter-rag-pdf-chunk-metadata-index'
 translationHref: '/how-documents-enter-rag-pdf-chunk-metadata-index'
 translationLabel: 'English'
+series: 'RAG 基础'
+seriesOrder: 2
+seriesTotal: 6
+seriesHref: '/zh/series/rag-foundations'
 ---
 
 <div class="my-8 rounded-2xl border border-blue-200 bg-blue-50 p-5 dark:border-blue-900 dark:bg-blue-950/40">
@@ -23,7 +27,7 @@ translationLabel: 'English'
 
 如果 PDF 的阅读顺序错了、表格被压成乱码、标题与正文失去关系，后面的 embedding、reranking 和 LLM 都只能处理损坏的输入。
 
-![从 PDF 到可检索证据的完整流程](/images/blog/document-to-rag-evidence.svg)
+![从 PDF 到可检索证据的完整流程](/images/blog/document-to-rag-evidence-zh.svg)
 
 ## 1. 为什么 PDF 不是天然的“文本”？
 
@@ -72,7 +76,7 @@ Page 33
 
 一个短段落可以直接成为一个 chunk。一个超长表格可能被分成多个 chunks；几个很短、共享同一标题的段落也可能被合并。关键是：chunk 即使经过拆分或合并，也应该能够映射回原始 evidence objects。
 
-![小块、大块与结构感知切分的权衡](/images/blog/chunking-tradeoffs.svg)
+![小块、大块与结构感知切分的权衡](/images/blog/chunking-tradeoffs-zh.svg)
 
 ## 4. Chunking 的核心权衡
 
@@ -126,7 +130,7 @@ Metadata 是描述内容来源与属性的结构化字段。例如：
 
 第二，**retrieval signal**：如果问题明确说 2017 年，系统可以先过滤其他年份，再进行相关性排序。在跨年度年报中，这往往比单纯依赖语义相似度更可靠。
 
-![Metadata 如何用于过滤、排序和引用](/images/blog/metadata-as-retrieval-signal.svg)
+![Metadata 如何用于过滤、排序和引用](/images/blog/metadata-as-retrieval-signal-zh.svg)
 
 好的 metadata 应该来自可验证的文档信息。由 LLM 猜测产生的字段需要标记来源和置信度，不能悄悄当作事实。
 
@@ -190,3 +194,8 @@ Embedding model 把每个 chunk 映射成一个向量。查询也被映射到同
 - [Docling：Chunking concepts](https://docling-project.github.io/docling/concepts/chunking/)
 - [Docling：Architecture](https://docling-project.github.io/docling/concepts/architecture/)
 - [Docling Technical Report](https://arxiv.org/abs/2408.09869)
+
+<div class="my-10 flex flex-col gap-3 border-t border-slate-200 pt-6 dark:border-slate-700 sm:flex-row sm:justify-between">
+  <a href="/zh/what-is-rag-from-retrieval-to-grounded-answer">← 1. 什么是 RAG？</a>
+  <a href="/zh/keyword-vs-vector-retrieval">3. 关键词检索与向量检索 →</a>
+</div>

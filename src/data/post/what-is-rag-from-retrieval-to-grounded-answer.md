@@ -11,6 +11,10 @@ author: 'Xiaojing Yang'
 translationKey: 'what-is-rag-from-retrieval-to-grounded-answer'
 translationHref: '/zh/what-is-rag-from-retrieval-to-grounded-answer'
 translationLabel: '中文'
+series: 'RAG Foundations'
+seriesOrder: 1
+seriesTotal: 6
+seriesHref: '/series/rag-foundations'
 ---
 
 ## 1. What is RAG?
@@ -72,6 +76,8 @@ RAG separates **where knowledge is stored** from **how an answer is expressed**.
 
 When the documents change, we can normally update the knowledge base and index without retraining the language model.
 
+![The difference between using RAG and relying on a language model alone](/images/blog/rag-with-and-without-en.svg)
+
 RAG does **not** guarantee correctness. It creates a way for the answer to be grounded in external evidence. Reliability still depends on document processing, retrieval, prompting, generation, and verification.
 
 ## 2. RAG is a system, not a single model
@@ -95,10 +101,15 @@ Instead of memorising a glossary, follow the opening annual-report question thro
 
 The five objects most easily confused form a progressively narrower chain:
 
-```text
-Document       → Chunk          → Candidate             → Context           → Answer
-original source  retrieval unit   possibly relevant item   selected evidence   final output
-```
+**Document → Chunk → Candidate → Context → Answer**
+
+| Step | Object    | Meaning                  |
+| ---- | --------- | ------------------------ |
+| 1    | Document  | Original source          |
+| 2    | Chunk     | Retrieval unit           |
+| 3    | Candidate | Possibly relevant result |
+| 4    | Context   | Selected evidence        |
+| 5    | Answer    | Final output             |
 
 Therefore, **a candidate is not necessarily correct evidence, and context is not necessarily sufficient.** If parsing loses a table, it never becomes a chunk or enters the index; the retriever cannot find it, and the generator never sees it. This is why RAG reliability belongs to the whole system, not only to the final language model.
 
@@ -233,27 +244,19 @@ The offline stage determines **what can be searched**. The online stage determin
 
 ## 7. How should a RAG system be evaluated?
 
-Evaluating only the final answer hides where an error began.
+Evaluating only the final answer hides where an error began. A practical diagnosis separates three layers:
 
-![Three levels of RAG evaluation](/images/blog/rag-three-level-evaluation.svg)
+![Three levels of RAG evaluation](/images/blog/rag-three-level-evaluation-en.svg)
 
-Retrieval metrics include Precision@k, Recall@k, MRR, and nDCG. If $G_q$ is the gold evidence and $R_q^k$ is the Top-k result set:
+| Layer     | Core question                                                                |
+| --------- | ---------------------------------------------------------------------------- |
+| Retrieval | Did the correct material enter Top-k, and were useful results ranked highly? |
+| Evidence  | Is the selected evidence correct, sufficient, complete, and traceable?       |
+| Answer    | Is the final response correct, grounded in the evidence, and properly cited? |
 
-$$
-\operatorname{Recall@k}(q)=\frac{|G_q\cap R_q^k|}{|G_q|}
-$$
+For the running annual-report example, these become three concrete checks: did retrieval find the 2017 table, did the context contain every fact needed for the calculation, and did the generator produce 36% with a valid citation to page 33?
 
-Evidence evaluation then asks whether the report, year, page, and object are correct and whether **all** evidence required by a multi-hop question was found. Finally, answer evaluation measures correctness, relevance, faithfulness, groundedness, and citation correctness.
-
-A correct answer can come from model memory while citing the wrong page. Conversely, retrieval can succeed while generation misreads a number. These failures require different fixes.
-
-For the running example, evaluation can now ask three separate questions:
-
-1. **Retrieval:** did the system return the correct 2017 report and table rather than a similar table from another year?
-2. **Evidence:** did it retrieve every row or fact needed to compute the requested share, with the correct page and metadata?
-3. **Answer:** did the generator produce 36%, interpret the table correctly, and cite page 33?
-
-This is the progression from **relevant** to **correct**, **sufficient**, **complete**, and finally **grounded**.
+A correct answer can still hide wrong evidence, while correct retrieval can be followed by a calculation error. The dedicated article [How to Evaluate a Retrieval System](/evaluating-retrieval-systems) explains Precision, Recall, MRR, nDCG, evidence completeness, groundedness, and citation evaluation.
 
 ## 8. RAG, search, and fine-tuning
 
@@ -334,3 +337,7 @@ The next article asks: **How does a PDF become a collection of retrievable, cita
 - [Microsoft Learn: Introduction to retrieval-augmented generation concepts](https://learn.microsoft.com/en-us/training/modules/rag-fundamentals/)
 - [Lewis et al. (2020): Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401)
 - [Microsoft Learn: RAG and indexes](https://learn.microsoft.com/en-us/azure/ai-foundry/concepts/retrieval-augmented-generation)
+
+<div class="my-10 flex flex-col gap-3 border-t border-slate-200 pt-6 dark:border-slate-700 sm:flex-row sm:justify-end">
+  <a href="/how-documents-enter-rag-pdf-chunk-metadata-index">2. How documents enter RAG →</a>
+</div>

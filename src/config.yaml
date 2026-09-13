@@ -11,7 +11,7 @@ metadata:
   title:
     default: Xiaojing Yang · AI Research Notes
     template: '%s — Xiaojing Yang'
-  description: 'Bilingual foundations and research notes on mathematics, statistics, machine learning, NLP, LLMs, model evaluation, and applied AI systems.'
+  description: 'Foundations and research notes on mathematics, statistics, machine learning, NLP, LLMs, model evaluation, and applied AI systems.'
   robots:
     index: true
     follow: true

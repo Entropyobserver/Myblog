@@ -1,0 +1,89 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+
+const metadata = {
+  title: 'RAG Foundations',
+  description:
+    'A six-part visual foundation for RAG, document preparation, retrieval, reranking, evaluation, and multi-step systems.',
+};
+
+const articles = [
+  {
+    number: 1,
+    title: 'What Is RAG?',
+    description: 'Retrieval, augmentation, generation, grounding, and the difference between a model and a system.',
+    href: '/what-is-rag-from-retrieval-to-grounded-answer',
+  },
+  {
+    number: 2,
+    title: 'How Documents Enter RAG',
+    description: 'PDF extraction, evidence objects, chunking, metadata, embeddings, and indexes.',
+    href: '/how-documents-enter-rag-pdf-chunk-metadata-index',
+  },
+  {
+    number: 3,
+    title: 'Keyword Search vs Vector Search',
+    description: 'Inverted indexes, BM25, embeddings, dense retrieval, and complementary failure modes.',
+    href: '/keyword-vs-vector-retrieval',
+  },
+  {
+    number: 4,
+    title: 'Hybrid Retrieval and Reranking',
+    description: 'Candidate generation, RRF, deduplication, cross-encoders, and the recall ceiling.',
+    href: '/hybrid-retrieval-and-reranking',
+  },
+  {
+    number: 5,
+    title: 'Evaluating Retrieval Systems',
+    description: 'Precision, Recall, MRR, nDCG, gold evidence, and evidence completeness.',
+    href: '/evaluating-retrieval-systems',
+  },
+  {
+    number: 6,
+    title: 'Multi-hop, GraphRAG, and Agentic RAG',
+    description: 'Query planning, graph traversal, iterative retrieval, verification, retry, and stopping.',
+    href: '/multi-hop-graphrag-and-agentic-rag',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="RAG Foundations · 6-part series"
+    actions={[
+      { variant: 'primary', text: 'Start with article 1', href: articles[0].href, icon: 'tabler:arrow-right' },
+      { text: 'Chinese version', href: '/zh/series/rag-foundations' },
+    ]}
+  >
+    <Fragment slot="title">From documents to reliable retrieval systems.</Fragment>
+    <Fragment slot="subtitle">
+      Six visual articles build one connected mental model: understand RAG, prepare evidence, retrieve candidates,
+      combine and rerank them, evaluate what was found, then handle questions that need more than one search.
+    </Fragment>
+  </Hero>
+
+  <section class="mx-auto max-w-4xl px-4 pb-20 sm:px-6">
+    <div
+      class="relative space-y-5 before:absolute before:bottom-8 before:left-6 before:top-8 before:w-px before:bg-slate-200 dark:before:bg-slate-700 sm:before:left-8"
+    >
+      {
+        articles.map((article) => (
+          <a
+            class="relative grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 pl-16 transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-900 dark:hover:border-blue-700 sm:grid-cols-[1fr_auto] sm:items-center sm:p-6 sm:pl-20"
+            href={article.href}
+          >
+            <span class="absolute left-3.5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-primary font-bold text-white sm:left-3 sm:top-6 sm:h-12 sm:w-12">
+              {article.number}
+            </span>
+            <span>
+              <span class="block font-heading text-xl font-bold text-slate-900 dark:text-white">{article.title}</span>
+              <span class="mt-2 block leading-7 text-muted dark:text-slate-300">{article.description}</span>
+            </span>
+            <span class="font-semibold text-primary">Read →</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</Layout>
